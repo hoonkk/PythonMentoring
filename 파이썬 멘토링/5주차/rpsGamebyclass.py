@@ -1,9 +1,7 @@
 import random
 
-
 class Player:
-    record = 0  # 게임에서 승리한 횟수
-
+    record = 0
     def __init__(self, name):
         self.name = name
 
@@ -14,7 +12,7 @@ class Player:
         choice = random.choice(rpsList)  # Random으로 리스트 중 하나를 Choice해서 받아온다.
         return choice
 
-    def checkwinner(self, user, computer):
+    def checkwinner(self,user, computer):
         print('User : ', user, ', Computer : ', computer)
         if user == '바위':
             if computer == '바위':
@@ -59,14 +57,9 @@ class Player:
                 win += 1
             elif check == '패배':
                 print(win, '번 이겼습니다\n')
+                #  따로 추가해 줄 것
                 self.record = win
-                f = open("랭킹.txt", 'a')
-                date = ('%s는 %d번 승리했습니다\n') % (self.name, self.record)
-                f.write(date)
-                f.close()
-
                 break
-
 
 rankingList = []
 while True:
@@ -80,17 +73,5 @@ while True:
         #  게임이 끝나면
         rankingList.append(player)
     elif menu == 2:
-        # for player in rankingList:
-        #     print(player.name,'은 ' ,player.record, '승을 기록했습니다.', sep='')
-
-        try:
-            fr = open("랭킹.txt", 'r')
-            while True:
-                line = fr.readline()
-                if not line: break
-                print(line, end='')
-            fr.close()
-        except FileNotFoundError:
-            print('파일을 찾을 수 없습니다')
-
-
+        for player in rankingList:
+            print(player.name,'은 ' ,player.record, '승을 기록했습니다.', sep='')
